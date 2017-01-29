@@ -12,7 +12,7 @@
 
 BOEFFLA_VERSION="6.0-beta7-CM14.1-i9300-UNOFFICIAL_u494"
 
-TOOLCHAIN="/opt/toolchains/arm-eabi-4.8/bin/arm-eabi-"
+TOOLCHAIN="/home/gianogli/dati/android/my_toolchain/arm-eabi-4.9/bin/arm-eabi-"
 ARCHITECTURE=arm
 COMPILER_FLAGS_KERNEL="-mtune=cortex-a9 -fno-diagnostics-show-caret"
 COMPILER_FLAGS_MODULE="-mtune=cortex-a9 -fno-diagnostics-show-caret"

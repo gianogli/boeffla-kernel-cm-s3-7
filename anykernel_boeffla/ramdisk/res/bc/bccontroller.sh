@@ -3,7 +3,7 @@
 # Boeffla-Config controller interface
 #
 # *****************************
-# i9300 Cyanogenmod 13.0 version
+# i9300 Lineage14 version
 #
 # V0.1
 # *****************************
@@ -13,7 +13,7 @@
 # ********************************
 
 # kernel specification (hardware; type; target; url)
-KERNEL_SPECS="i9300;cm;cm14.0;http://kernel.boeffla.de/sgs3/boeffla-kernel-cm/;boeffla-kernel-#VERSION#-CM14.1-i9300-anykernel.recovery.zip"
+KERNEL_SPECS="i9300;cm;cm14.0;http://kernel.boeffla.de/sgs3/boeffla-kernel-cm/;boeffla-kernel-#VERSION#-Lineage14.1-i9300-anykernel.recovery.zip"
 
 # kernel features 
 # (1=enable-busybox,2=enable-frandom,3=wipe-cache,4=disable-zram-control)
@@ -1225,14 +1225,22 @@ fi
 
 if [ "apply_ums" == "$1" ]; then
 	if [ "1" == "$2" ]; then
+		echo "1" > /sys/devices/platform/s3c-usbgadget/gadget/lun0/nofua
+		echo "0" > /sys/devices/platform/s3c-usbgadget/gadget/lun0/ro
 		echo "0" > /sys/devices/platform/s3c-usbgadget/gadget/lun0/cdrom
-		/system/bin/setprop persist.sys.usb.config mass_storage,adb
 		echo "/dev/block/mmcblk1p1" > /sys/devices/platform/s3c-usbgadget/gadget/lun0/file
+		echo 0 > /sys/class/android_usb/android0/enable;
+		echo mass_storage > /sys/class/android_usb/android0/functions
+		echo 1 > /sys/class/android_usb/android0/enable
+		setprop sys.usb.config mass_storage,adb
 	fi
 
 	if [ "0" == "$2" ]; then
 		echo "" > /sys/devices/platform/s3c-usbgadget/gadget/lun0/file
-		/system/bin/setprop persist.sys.usb.config mtp,adb
+		echo 0 > /sys/class/android_usb/android0/enable;
+		echo mtp > /sys/class/android_usb/android0/functions
+		echo 1 > /sys/class/android_usb/android0/enable
+		setprop sys.usb.config mtp,adb
 	fi
 	exit 0
 fi

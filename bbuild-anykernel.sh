@@ -10,7 +10,7 @@
 # Parameters to be configured manually
 #######################################
 
-BOEFFLA_VERSION="6.0-alpha-CM14.1-i9300"
+BOEFFLA_VERSION="6.0-beta9-CM14.1-i9300-UNOFFICIAL_u541"
 
 TOOLCHAIN="/opt/toolchains/arm-eabi-4.8/bin/arm-eabi-"
 ARCHITECTURE=arm

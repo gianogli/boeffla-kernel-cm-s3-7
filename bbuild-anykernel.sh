@@ -379,7 +379,7 @@ stepB_backup()
 	BACKUP_FILE="$ROOT_DIR_NAME""_$(date +"%Y-%m-%d_%H-%M").tar.gz"
 
 	cd $ROOT_PATH
-	tar cvfz $BACKUP_FILE source x-settings.sh
+	tar --use-compress-program=pigz -cvf $BACKUP_FILE source x-settings.sh
 	cd $SOURCE_PATH
 
 	# transfer backup only if smbshare configured
@@ -408,7 +408,6 @@ display_help()
 	echo "rel = all, execute steps 0-9 - without CCACHE  |  r = rewrite config"
 	echo "a   = all, execute steps 0-9                   |  c = cleanup"
 	echo "u   = upd, execute steps 3-9                   |  b = backup"
-	echo "ur  = upd, execute steps 5-9                   |"
 	echo
 	echo "======================================================================"
 	echo
@@ -465,12 +464,6 @@ case "$1" in
 	u)
 		step3_compile
 		step4_prepare_anykernel
-		step5_create_anykernel_zip
-		step7_analyse_log
-		step8_transfer_kernel
-		step9_send_finished_mail
-		;;
-	ur)
 		step5_create_anykernel_zip
 		step7_analyse_log
 		step8_transfer_kernel
